@@ -16,6 +16,7 @@ namespace HexetchButBetter
             { "Disenchant", "DISENCHANT" },
             { "Upgrade", "UPGRADE" },
             { "Reroll", "REROLL" },
+            { "Forge into egg", "FORGE" },
         };
 
         private Dictionary<String, List<String>> preparedPosts = new Dictionary<string, List<String>>();
@@ -23,7 +24,7 @@ namespace HexetchButBetter
         private JsonObject lootNames = null;
         private JsonArray recipes = null;
         
-        enum LootType {Unknown, Champion, Skin, Emote, Wardskin, Icon, Chest};
+        enum LootType {Unknown, Champion, Skin, Emote, Wardskin, Icon, Companion, Chest};
         private LootType currentLoot = LootType.Unknown;
         
         public HextechButBetterForm()
@@ -69,6 +70,13 @@ namespace HexetchButBetter
             if (!checkIfLeagueIsConnected()) return;
             await refreshData();
             printIcons();
+        }
+
+        private async void loadCompanionsButton_Click(object sender, EventArgs e)
+        {
+            if (!checkIfLeagueIsConnected()) return;
+            await refreshData();
+            printCompanions();
         }
 
         private async void loadChestsButton_Click(object sender, EventArgs e)
@@ -158,12 +166,27 @@ namespace HexetchButBetter
             fillProcessType();
         }
 
+        private void printCompanions()
+        {
+            if (!printData("COMPANION")) return;
+            currentLoot = LootType.Companion;
+            fillProcessType();
+        }
+
         private void fillProcessType()
         {
             clearProcessType();
-            processType.Items.Insert(0, "");
-            processType.Items.Insert(1, "Disenchant");
-            processType.Items.Insert(2, "Upgrade");
+            switch (currentLoot)
+            {
+                case LootType.Companion:
+                    processType.Items.Insert(0, "Forge into egg");
+                    break;
+                default:
+                    processType.Items.Insert(0, "");
+                    processType.Items.Insert(1, "Disenchant");
+                    processType.Items.Insert(2, "Upgrade");
+                    break;
+            }
         }
 
         private void clearProcessType()
@@ -239,7 +262,8 @@ namespace HexetchButBetter
                 {
                     Int64 count = 0;
                     count = (Int64) item["count"];
-                    String itemDesc = (String) item["itemDesc"];
+                    String itemDesc = (String) item["localizedName"];
+                    if (itemDesc.Equals("")) itemDesc = (String) item["itemDesc"];
                     String lootId = (String) item["lootId"];
                     NumericUpDown numericUpDown = new NumericUpDown();
                     numericUpDown.Minimum = 0;
@@ -276,6 +300,9 @@ namespace HexetchButBetter
                     break;
                 case LootType.Icon:
                     processLoot(map["ICON"]);
+                    break;
+                case LootType.Companion:
+                    processLoot(map["COMPANION"]);
                     break;
                 case LootType.Chest:
                     processLootChest();
