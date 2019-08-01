@@ -484,13 +484,13 @@ namespace HexetchButBetter
         {
             MessageBox.Show("The goal of HextechButBetter:\n" +
                             "\n" +
-                            "I believe that we all should help each other. We are only mere humans. We can't do much as individuals but together we can achieve ANYTHING if we work on it for long enough.\n" +
+                            "I believe that we all should help each other. Many of you expressed your frustration regarding Hextech, disenchanting, exchanging tokens, openings chests and in general about current state. This app aim to resolve the issues by getting rid of annoying animation and delays plus allowing you to do multiple things at once, making the processing Hextech stuff even faster.\n" +
                             "\n" +
                             "I wish to share this software with you to achieve two goals:\n" +
                             "- reduce monotonous and time consuming work of disenchanting, crafting, forging and exchanging items in Hextech\n" +
                             "- to get Riot back on the right track and make them treat millions of customers with responsibility\n" +
                             "\n" +
-                            "I believe that Riot (in some aspects) does NOT treat their customers properly. Hextech is an example of this.\n" +
+                            "I believe that Riot in some aspects does NOT treat their customers properly. Hextech is an example of this.\n" +
                             "Years passed and Hextech functionality is as bad as it was at the beginning. It is about the time they realized of all the time wasted on it by all the players and their frustration.\n" +
                             "Together, I'm sure we have wasted around million of hours as a species. We could do so much... If not, we could at least spend these 5 minutes that we wasted on Hextech just chilling.\n" +
                             "\n" +
