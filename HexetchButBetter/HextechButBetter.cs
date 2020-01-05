@@ -258,6 +258,16 @@ namespace HexetchButBetter
             }
             else
             {
+                Label countLabel = new Label();
+                countLabel.Text = "Total:";
+                countLabel.Width = 200;
+                outputPanel.Controls.Add(countLabel);
+                
+                NumericUpDown countNumbericUpDown = new NumericUpDown();
+                countNumbericUpDown.Minimum = map[type].Count;
+                countNumbericUpDown.Maximum = map[type].Count;
+                outputPanel.Controls.Add(countNumbericUpDown);
+                
                 foreach (JsonObject item in map[type])
                 {
                     Int64 count = 0;
