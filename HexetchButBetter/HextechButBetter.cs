@@ -258,15 +258,32 @@ namespace HexetchButBetter
             }
             else
             {
-                Label countLabel = new Label();
-                countLabel.Text = "Total:";
-                countLabel.Width = 200;
-                outputPanel.Controls.Add(countLabel);
+                Int64 numberOfShards = 0;
+                foreach (JsonObject item in map[type])
+                {
+                    Int64 count = (Int64) item["count"];
+                    numberOfShards += count;
+                }
+
+                Label uniqueLabel = new Label();
+                uniqueLabel.Text = "Unique shards:";
+                uniqueLabel.Width = 200;
+                outputPanel.Controls.Add(uniqueLabel);
                 
-                NumericUpDown countNumbericUpDown = new NumericUpDown();
-                countNumbericUpDown.Minimum = map[type].Count;
-                countNumbericUpDown.Maximum = map[type].Count;
-                outputPanel.Controls.Add(countNumbericUpDown);
+                NumericUpDown uniqueNumbericUpDown = new NumericUpDown();
+                uniqueNumbericUpDown.Minimum = map[type].Count;
+                uniqueNumbericUpDown.Maximum = map[type].Count;
+                outputPanel.Controls.Add(uniqueNumbericUpDown);
+
+                Label totalLabel = new Label();
+                totalLabel.Text = "All shards:";
+                totalLabel.Width = 200;
+                outputPanel.Controls.Add(totalLabel);
+                
+                NumericUpDown totalNumbericUpDown = new NumericUpDown();
+                totalNumbericUpDown.Minimum = numberOfShards;
+                totalNumbericUpDown.Maximum = numberOfShards;
+                outputPanel.Controls.Add(totalNumbericUpDown);
                 
                 foreach (JsonObject item in map[type])
                 {
