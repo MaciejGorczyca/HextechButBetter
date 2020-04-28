@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+// move into diff file
+// https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/loot.json
 
 namespace HexetchButBetter
 {
@@ -23,6 +27,8 @@ namespace HexetchButBetter
 
         private JsonObject lootNames = null;
         private JsonArray recipes = null;
+        
+        private List<Tuple<string, JsonObject>> lootNameAndRecipeName = new List<Tuple<string, JsonObject>>();
         
         enum LootType {Unknown, Champion, Skin, Emote, Wardskin, Icon, Companion, Chest};
         private LootType currentLoot = LootType.Unknown;
@@ -396,9 +402,7 @@ namespace HexetchButBetter
                 MessageBox.Show("Repeat at least once");
                 return;
             }
-            JsonObject item = map["CHEST"][chestsComboBox.SelectedIndex-1];
-            
-            JsonObject recipe = (JsonObject) recipes[chestsRecipeComboBox.SelectedIndex - 1];
+            JsonObject recipe = lootNameAndRecipeName[chestsRecipeComboBox.SelectedIndex - 1].Item2;
             JsonArray slots = (JsonArray) recipe["slots"];
             String body = "[";
             
@@ -447,26 +451,23 @@ namespace HexetchButBetter
             chestsRecipeComboBox.Items.Clear();
             chestsRecipeComboBox.ResetText();
             chestsRecipeComboBox.Items.Insert(0, "Select recipe");
-            int index = 1;
             JsonObject item = map["CHEST"][chestsComboBox.SelectedIndex-1];
             recipes = (JsonArray) await lc.Get("/lol-loot/v1/recipes/initial-item/" + item["lootId"]);
+            lootNameAndRecipeName = new List<Tuple<string, JsonObject>>();
             foreach (JsonObject recipe in recipes)
             {
                 String recipeName = (String) recipe["contextMenuText"];
                 if (recipeName.Equals(""))
                 {
-                    if (lootNames == null) getNamesFromCommunityDragon();
-                    recipeName = (String) recipe["recipeName"];
-                    try
-                    {
-                        recipeName = (String) lootNames["loot_recipe_name_" + recipeName.ToLower()] + " " + (String) lootNames["loot_recipe_desc_" + recipeName.ToLower()];;
-                    }
-                    catch (KeyNotFoundException exception)
-                    {
-                        recipeName = (String) lootNames["loot_recipe_desc_" + recipeName.ToLower()];
-                    }
+                    recipeName = (String) recipe["description"];
                 }
-                chestsRecipeComboBox.Items.Insert(index, recipeName);
+                lootNameAndRecipeName.Add(new Tuple<string, JsonObject>(recipeName, recipe));
+            }
+            lootNameAndRecipeName = lootNameAndRecipeName.OrderBy(t => t.Item1).ToList();
+            int index = 1;
+            foreach (var recipe in lootNameAndRecipeName)
+            {
+                chestsRecipeComboBox.Items.Insert(index, recipe.Item1);
                 index++;
             }
         }
