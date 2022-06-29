@@ -29,12 +29,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources =
-                new System.ComponentModel.ComponentResourceManager(typeof(HextechButBetterForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HextechButBetterForm));
             this.loadChampionsButton = new System.Windows.Forms.Button();
             this.messageLabel = new System.Windows.Forms.Label();
             this.outputPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.repoUrlButton = new System.Windows.Forms.Button();
             this.loadChestsButton = new System.Windows.Forms.Button();
             this.loadCompanionsButton = new System.Windows.Forms.Button();
             this.goalOfHextechButBetterButton = new System.Windows.Forms.Button();
@@ -64,11 +64,7 @@
             // 
             // messageLabel
             // 
-            this.messageLabel.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
-                                                         System.Windows.Forms.AnchorStyles.Bottom) |
-                                                        System.Windows.Forms.AnchorStyles.Left) |
-                                                       System.Windows.Forms.AnchorStyles.Right)));
+            this.messageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.messageLabel.Location = new System.Drawing.Point(0, 350);
             this.messageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.messageLabel.Name = "messageLabel";
@@ -77,11 +73,7 @@
             // 
             // outputPanel
             // 
-            this.outputPanel.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
-                                                         System.Windows.Forms.AnchorStyles.Bottom) |
-                                                        System.Windows.Forms.AnchorStyles.Left) |
-                                                       System.Windows.Forms.AnchorStyles.Right)));
+            this.outputPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.outputPanel.AutoScroll = true;
             this.outputPanel.Location = new System.Drawing.Point(124, 12);
             this.outputPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -91,6 +83,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.repoUrlButton);
             this.panel1.Controls.Add(this.loadChestsButton);
             this.panel1.Controls.Add(this.loadCompanionsButton);
             this.panel1.Controls.Add(this.goalOfHextechButBetterButton);
@@ -111,6 +104,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(120, 681);
             this.panel1.TabIndex = 3;
+            // 
+            // repoUrlButton
+            // 
+            this.repoUrlButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.repoUrlButton.Location = new System.Drawing.Point(0, 357);
+            this.repoUrlButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.repoUrlButton.Name = "repoUrlButton";
+            this.repoUrlButton.Size = new System.Drawing.Size(120, 50);
+            this.repoUrlButton.TabIndex = 15;
+            this.repoUrlButton.Text = "Open release page";
+            this.repoUrlButton.UseVisualStyleBackColor = true;
+            this.repoUrlButton.Click += new System.EventHandler(this.RepoUrlButton_Click);
             // 
             // loadChestsButton
             // 
@@ -139,7 +144,7 @@
             // goalOfHextechButBetterButton
             // 
             this.goalOfHextechButBetterButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.goalOfHextechButBetterButton.Location = new System.Drawing.Point(0, 405);
+            this.goalOfHextechButBetterButton.Location = new System.Drawing.Point(0, 407);
             this.goalOfHextechButBetterButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.goalOfHextechButBetterButton.Name = "goalOfHextechButBetterButton";
             this.goalOfHextechButBetterButton.Size = new System.Drawing.Size(120, 50);
@@ -151,7 +156,7 @@
             // legalNoteButton
             // 
             this.legalNoteButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.legalNoteButton.Location = new System.Drawing.Point(0, 455);
+            this.legalNoteButton.Location = new System.Drawing.Point(0, 457);
             this.legalNoteButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.legalNoteButton.Name = "legalNoteButton";
             this.legalNoteButton.Size = new System.Drawing.Size(120, 50);
@@ -163,7 +168,7 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(0, 505);
+            this.label1.Location = new System.Drawing.Point(0, 507);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 53);
@@ -174,7 +179,7 @@
             // donateButton
             // 
             this.donateButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.donateButton.Location = new System.Drawing.Point(0, 558);
+            this.donateButton.Location = new System.Drawing.Point(0, 560);
             this.donateButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.donateButton.Name = "donateButton";
             this.donateButton.Size = new System.Drawing.Size(120, 50);
@@ -211,10 +216,10 @@
             // 
             this.processType.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.processType.FormattingEnabled = true;
-            this.processType.Location = new System.Drawing.Point(0, 608);
+            this.processType.Location = new System.Drawing.Point(0, 610);
             this.processType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.processType.Name = "processType";
-            this.processType.Size = new System.Drawing.Size(120, 23);
+            this.processType.Size = new System.Drawing.Size(120, 21);
             this.processType.TabIndex = 5;
             // 
             // loadEmotesButton
@@ -259,7 +264,7 @@
             this.ClientSize = new System.Drawing.Size(824, 681);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.outputPanel);
-            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(640, 640);
             this.Name = "HextechButBetterForm";
@@ -268,6 +273,8 @@
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button repoUrlButton;
 
         #endregion
 

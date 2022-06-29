@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,6 +43,7 @@ namespace HexetchButBetter
         private void HextechButBetterForm_Load(object sender, EventArgs e)
         {
             lc = new LeagueConnection();
+            getLatestReleaseDate(repoUrlButton);
         }
 
         private async void loadChampionsButton_Click(object sender, EventArgs e)
@@ -223,8 +226,9 @@ namespace HexetchButBetter
                 chestsComboBox.Name = "chestsComboBox";
                 chestsComboBox.Width = 200;
                 chestsComboBox.SelectedValueChanged += chestComboBoxChanged;
-                chestsComboBox.Items.Insert(0, "Select material");
+                chestsComboBox.Items.Insert(0, "Select material ("+ map[type].Count + " found)");
                 outputPanel.Controls.Add(chestsComboBox);
+                chestsComboBox.SelectedIndex = 0;
                 int index = 1;
                 foreach (JsonObject item in map[type])
                 {
@@ -256,11 +260,12 @@ namespace HexetchButBetter
                 ComboBox chestsRecipeComboBox = new ComboBox();
                 chestsRecipeComboBox.Name = "chestsRecipeComboBox";
                 chestsRecipeComboBox.Width = 200;
-                chestsRecipeComboBox.Items.Insert(0, "Select recipe");
+                chestsRecipeComboBox.Items.Insert(0, "Select recipe (0 found)");
 
                 outputPanel.Controls.Add(label);
                 outputPanel.Controls.Add(numericUpDown);
                 outputPanel.Controls.Add(chestsRecipeComboBox);
+                chestsRecipeComboBox.SelectedIndex = 0;
             }
             else
             {
@@ -299,6 +304,7 @@ namespace HexetchButBetter
                     if (itemDesc.Equals("")) itemDesc = (String) item["itemDesc"];
                     String lootId = (String) item["lootId"];
                     NumericUpDown numericUpDown = new NumericUpDown();
+                    numericUpDown.Value = count;
                     numericUpDown.Minimum = 0;
                     numericUpDown.Maximum = count;
                     numericUpDown.Name = lootId;
@@ -450,9 +456,9 @@ namespace HexetchButBetter
             ComboBox chestsRecipeComboBox = (ComboBox) outputPanel.Controls["chestsRecipeComboBox"];
             chestsRecipeComboBox.Items.Clear();
             chestsRecipeComboBox.ResetText();
-            chestsRecipeComboBox.Items.Insert(0, "Select recipe");
             JsonObject item = map["CHEST"][chestsComboBox.SelectedIndex-1];
             recipes = (JsonArray) await lc.Get("/lol-loot/v1/recipes/initial-item/" + item["lootId"]);
+            chestsRecipeComboBox.Items.Insert(0, "Select recipe (" + recipes.Count + " found)");
             lootNameAndRecipeName = new List<Tuple<string, JsonObject>>();
             foreach (JsonObject recipe in recipes)
             {
@@ -468,6 +474,7 @@ namespace HexetchButBetter
             foreach (var recipe in lootNameAndRecipeName)
             {
                 chestsRecipeComboBox.Items.Insert(index, recipe.Item1);
+                chestsRecipeComboBox.SelectedIndex = 0;
                 index++;
             }
         }
@@ -489,6 +496,20 @@ namespace HexetchButBetter
                 lc.Post(data.Key, body);
             }
             preparedPosts.Clear();
+        }
+
+        private async void getLatestReleaseDate(Button button)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var userAgentHeader = new ProductInfoHeaderValue("HextechButBetterHttpClient", "1.0");
+                client.DefaultRequestHeaders.UserAgent.Add(userAgentHeader);
+                string latestReleaseString = await client.GetStringAsync("https://api.github.com/repos/MaciejGorczyca/HextechButBetter/releases/latest");
+                var latestReleaseJson = (JsonObject) SimpleJson.DeserializeObject(latestReleaseString);
+                var latestReleasePublishedDate = "\nLatest release date: " + (String) latestReleaseJson["published_at"];
+                button.Text += latestReleasePublishedDate;
+            }
+            
         }
 
         private void legalNoteButton_Click(object sender, EventArgs e)
@@ -531,7 +552,16 @@ namespace HexetchButBetter
                             "\n" +
                             "This is minimum what I would consider user-friendly but looking at current state (which is a joke), any improvements will be amazing!\n" +
                             "\n" +
-                            "The app took me few hours of prototyping and few hours of coding and adjusting stuff with bunch of games in between and with almost no knowledge about C# and literally zero experience. It is NOT idiot-proof and does NOT have many error prevention mechanisms, just do what with it what is expected and it shouldn't go boom boom. It is a horribly coded and as generic as it could be but it is working... If you want to have good looking hextech-crafting experience, you can go back to the official client. Some things might not work - I couldn't test it fully due to limited hextech content.\n");
+                            "The app took me few hours of prototyping and few hours of coding and adjusting stuff with bunch of games in between and with almost no knowledge about C# and literally zero experience. It is NOT idiot-proof and does NOT have many error prevention mechanisms, just do with it what is expected and it shouldn't go boom boom. It is a horribly coded and as generic as it could be but it is working... If you want to have good looking hextech-crafting experience, you can go back to the official client. Some things might not work - I couldn't test it fully due to limited hextech content.\n" +
+                            "\n" +
+                            "\n" +
+                            "\n" +
+                            "Update in 2022: The Hextech UI/UX is as terrible as it was 5 years ago.");
+        }
+
+        private void RepoUrlButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MaciejGorczyca/HextechButBetter/releases/latest");
         }
     }
 }
