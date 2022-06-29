@@ -3,7 +3,7 @@ HextechButBetter
 
 Making your crafting easier and faster ;)
 
-# Video preview:
+## Video preview:
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/pi53EOUoszo/0.jpg)](https://www.youtube.com/watch?v=pi53EOUoszo)
 
@@ -18,6 +18,14 @@ Windows C# application with main goal of assisting you during Hextech crafting! 
 - Bulk opening/crafting/forging/exchanging chests and tokens!
 
 Every run the app will send request to `https://api.github.com/repos/MaciejGorczyca/HextechButBetter/releases/latest` and check latest release date then print it in app.
+
+## Will I get banned? Is it legit?
+
+No, you won't get banned. Riot approved the app on the [Riot Developer Portal](https://developer.riotgames.com/).
+
+![Alt text](isitlegit1.png)
+
+![Alt text](isitlegit2.png)
 
 ## No more annoying animations or monotous repetition!
 - Disenchant all your champions by selecting them in app. Select disenchanting and click process. Let the magic do the work for you!
