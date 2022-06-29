@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -269,6 +270,10 @@ namespace HexetchButBetter
             }
             else
             {
+                var labelWidth = 270;
+                var textBoxWidth = 50;
+                var textAlign = ContentAlignment.MiddleLeft;
+                
                 Int64 numberOfShards = 0;
                 foreach (JsonObject item in map[type])
                 {
@@ -277,24 +282,30 @@ namespace HexetchButBetter
                 }
 
                 Label uniqueLabel = new Label();
-                uniqueLabel.Text = "Unique shards:";
-                uniqueLabel.Width = 200;
-                outputPanel.Controls.Add(uniqueLabel);
+                uniqueLabel.Text = "Unique shards";
+                uniqueLabel.Width = labelWidth;
+                uniqueLabel.TextAlign = textAlign;
                 
                 NumericUpDown uniqueNumbericUpDown = new NumericUpDown();
                 uniqueNumbericUpDown.Minimum = map[type].Count;
                 uniqueNumbericUpDown.Maximum = map[type].Count;
-                outputPanel.Controls.Add(uniqueNumbericUpDown);
+                uniqueNumbericUpDown.Width = textBoxWidth;
 
                 Label totalLabel = new Label();
-                totalLabel.Text = "All shards:";
-                totalLabel.Width = 200;
-                outputPanel.Controls.Add(totalLabel);
+                totalLabel.Text = "All shards";
+                totalLabel.Width = labelWidth;
+                totalLabel.TextAlign = textAlign;
                 
                 NumericUpDown totalNumbericUpDown = new NumericUpDown();
                 totalNumbericUpDown.Minimum = numberOfShards;
                 totalNumbericUpDown.Maximum = numberOfShards;
+                totalNumbericUpDown.Width = textBoxWidth;
+                
+                outputPanel.Controls.Add(uniqueNumbericUpDown);
+                outputPanel.Controls.Add(uniqueLabel);
+                
                 outputPanel.Controls.Add(totalNumbericUpDown);
+                outputPanel.Controls.Add(totalLabel);
                 
                 foreach (JsonObject item in map[type])
                 {
@@ -302,19 +313,24 @@ namespace HexetchButBetter
                     count = (Int64) item["count"];
                     String itemDesc = (String) item["localizedName"];
                     if (itemDesc.Equals("")) itemDesc = (String) item["itemDesc"];
+                    String itemType = (String) item["type"];
+                    if (itemType == "SKIN_RENTAL") itemDesc += " (Shard)";
+                    else if (itemType == "SKIN") itemDesc += " (Permanent)";
                     String lootId = (String) item["lootId"];
                     NumericUpDown numericUpDown = new NumericUpDown();
                     numericUpDown.Value = count;
                     numericUpDown.Minimum = 0;
                     numericUpDown.Maximum = count;
                     numericUpDown.Name = lootId;
+                    numericUpDown.Width = textBoxWidth;
 
                     Label label = new Label();
                     label.Text = count + "x " + itemDesc;
-                    label.Width = 200;
+                    label.Width = labelWidth;
+                    label.TextAlign = textAlign;
 
-                    outputPanel.Controls.Add(label);
                     outputPanel.Controls.Add(numericUpDown);
+                    outputPanel.Controls.Add(label);
                 }
             }
             editMessageLabel("Loaded.");
