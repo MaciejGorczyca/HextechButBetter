@@ -108,7 +108,7 @@
             // repoUrlButton
             // 
             this.repoUrlButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.repoUrlButton.Location = new System.Drawing.Point(0, 357);
+            this.repoUrlButton.Location = new System.Drawing.Point(0, 410);
             this.repoUrlButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.repoUrlButton.Name = "repoUrlButton";
             this.repoUrlButton.Size = new System.Drawing.Size(120, 50);
@@ -144,10 +144,10 @@
             // goalOfHextechButBetterButton
             // 
             this.goalOfHextechButBetterButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.goalOfHextechButBetterButton.Location = new System.Drawing.Point(0, 407);
+            this.goalOfHextechButBetterButton.Location = new System.Drawing.Point(0, 460);
             this.goalOfHextechButBetterButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.goalOfHextechButBetterButton.Name = "goalOfHextechButBetterButton";
-            this.goalOfHextechButBetterButton.Size = new System.Drawing.Size(120, 50);
+            this.goalOfHextechButBetterButton.Size = new System.Drawing.Size(120, 40);
             this.goalOfHextechButBetterButton.TabIndex = 12;
             this.goalOfHextechButBetterButton.Text = "Goal of HextechButBetter";
             this.goalOfHextechButBetterButton.UseVisualStyleBackColor = true;
@@ -156,10 +156,10 @@
             // legalNoteButton
             // 
             this.legalNoteButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.legalNoteButton.Location = new System.Drawing.Point(0, 457);
+            this.legalNoteButton.Location = new System.Drawing.Point(0, 500);
             this.legalNoteButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.legalNoteButton.Name = "legalNoteButton";
-            this.legalNoteButton.Size = new System.Drawing.Size(120, 50);
+            this.legalNoteButton.Size = new System.Drawing.Size(120, 40);
             this.legalNoteButton.TabIndex = 11;
             this.legalNoteButton.Text = "Legal note";
             this.legalNoteButton.UseVisualStyleBackColor = true;
@@ -168,21 +168,21 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Location = new System.Drawing.Point(0, 507);
+            this.label1.Location = new System.Drawing.Point(0, 540);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 53);
+            this.label1.Size = new System.Drawing.Size(120, 30);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Saved 10 mins or 1 hour? Consider donating!";
+            this.label1.Text = "Saved some time? Consider donating!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // donateButton
             // 
             this.donateButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.donateButton.Location = new System.Drawing.Point(0, 560);
+            this.donateButton.Location = new System.Drawing.Point(0, 570);
             this.donateButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.donateButton.Name = "donateButton";
-            this.donateButton.Size = new System.Drawing.Size(120, 50);
+            this.donateButton.Size = new System.Drawing.Size(120, 40);
             this.donateButton.TabIndex = 9;
             this.donateButton.Text = "Donate (PayPal)";
             this.donateButton.UseVisualStyleBackColor = true;
