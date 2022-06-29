@@ -141,46 +141,47 @@ namespace HexetchButBetter
             outputPanel.Controls.Clear();
         }
 
+        private void printContent(string contentType, LootType lootType)
+        {
+            if (!printData(contentType))
+                return;
+            currentLoot = lootType;
+            fillProcessType();
+        }
+
         private void printChampions()
         {
-            if (!printData("CHAMPION")) return;
-            currentLoot = LootType.Champion;
-            fillProcessType();
+            printContent("CHAMPION", LootType.Champion);
         }
 
         private void printSkins()
         {
-            if (!printData("SKIN")) return;
-            currentLoot = LootType.Skin;
-            fillProcessType();
+            printContent("SKIN", LootType.Skin);
         }
 
         private void printEmotes()
         {
-            if (!printData("EMOTE")) return;
-            currentLoot = LootType.Emote;
-            fillProcessType();
+            printContent("EMOTE", LootType.Emote);
         }
 
         private void printWards()
         {
-            if (!printData("WARDSKIN")) return;
-            currentLoot = LootType.Wardskin;
-            fillProcessType();
+            printContent("WARDSKIN", LootType.Wardskin);
         }
 
         private void printIcons()
         {
-            if (!printData("ICON")) return;
-            currentLoot = LootType.Icon;
-            fillProcessType();
+            printContent("ICON", LootType.Icon);
         }
 
         private void printCompanions()
         {
-            if (!printData("COMPANION")) return;
-            currentLoot = LootType.Companion;
-            fillProcessType();
+            printContent("COMPANION", LootType.Companion);
+        }
+
+        private void printChests()
+        {
+            printContent("CHEST", LootType.Chest);
         }
 
         private void fillProcessType()
@@ -205,13 +206,6 @@ namespace HexetchButBetter
             processType.ResetText();
         }
 
-        private void printChests()
-        {
-            if (!printData("CHEST")) return;
-            currentLoot = LootType.Chest;
-            clearProcessType();
-        }
-
         private bool printData(String type)
         {
             clearOutputPanel();
@@ -221,15 +215,19 @@ namespace HexetchButBetter
                 currentLoot = LootType.Unknown;
                 return false;
             }
-            if (type.Equals("CHEST"))
+            if (type == "CHEST")
             {
-                ComboBox chestsComboBox = new ComboBox();
-                chestsComboBox.Name = "chestsComboBox";
-                chestsComboBox.Width = 200;
+                ComboBox chestsComboBox = new ComboBox
+                {
+                    Name = nameof(chestsComboBox),
+                    Width = 200,
+                    DropDownStyle = ComboBoxStyle.DropDownList,
+                };
                 chestsComboBox.SelectedValueChanged += chestComboBoxChanged;
-                chestsComboBox.Items.Insert(0, "Select material ("+ map[type].Count + " found)");
+                chestsComboBox.Items.Add("Select material ("+ map[type].Count + " found)");
                 outputPanel.Controls.Add(chestsComboBox);
                 chestsComboBox.SelectedIndex = 0;
+
                 int index = 1;
                 foreach (JsonObject item in map[type])
                 {
@@ -240,31 +238,52 @@ namespace HexetchButBetter
                     String itemName = (String) item["localizedName"];
                     if (itemName.Equals(""))
                     {
-                        if (lootNames == null) getNamesFromCommunityDragon();
-                        if (lootName.StartsWith("CHAMPION_TOKEN_")) itemName = (String) lootNames["loot_name_" + lootName.ToLower()] + (String) item["itemDesc"];
-                        else if (lootName.EndsWith("MATERIAL_key_fragment")) itemName = (String) lootNames["loot_name_" + lootName.ToLower() + "[other]"] + (String) item["itemDesc"];
-                        else itemName = (String) lootNames["loot_name_" + lootId.ToLower()];
+                        if (lootNames == null)
+                            getNamesFromCommunityDragon();
+                        if (lootName.StartsWith("CHAMPION_TOKEN_"))
+                            itemName = (String) lootNames["loot_name_" + lootName.ToLower()] + (String) item["itemDesc"];
+                        else if (lootName.EndsWith("MATERIAL_key_fragment"))
+                            itemName = (String) lootNames["loot_name_" + lootName.ToLower() + "[other]"] + (String) item["itemDesc"];
+                        else
+                            itemName = (String) lootNames["loot_name_" + lootId.ToLower()];
                     }
-                    chestsComboBox.Items.Insert(index, count + "x " + itemName);
+                    chestsComboBox.Items.Insert(index, new Material(count, itemName));
                     index++;
                 }
-                NumericUpDown numericUpDown = new NumericUpDown();
-                numericUpDown.Minimum = 0;
-                numericUpDown.Maximum = 999999;
-                numericUpDown.Name = "chestsRepeatNumericUpDown";
+                NumericUpDown chestsRepeatNumericUpDown = new NumericUpDown
+                {
+                    Minimum = 0,
+                    Maximum = 999999,
+                    Name = nameof(chestsRepeatNumericUpDown)
+                };
+                chestsComboBox.SelectedIndexChanged += chestsComboBoxIndexChanged;
 
-                Label label = new Label();
-                label.Text = "Repeat: ";
-                label.AutoSize = true;
-                
-                
-                ComboBox chestsRecipeComboBox = new ComboBox();
-                chestsRecipeComboBox.Name = "chestsRecipeComboBox";
-                chestsRecipeComboBox.Width = 200;
+                void chestsComboBoxIndexChanged(object sender, EventArgs e)
+                {
+                    var item = chestsComboBox.SelectedItem;
+                    if (item is not Material material)
+                        return;
+
+                    chestsRepeatNumericUpDown.Maximum = material.Count;
+                    chestsRepeatNumericUpDown.Value = material.Count;
+                }
+
+                Label label = new Label
+                {
+                    Text = "Repeat: ",
+                    AutoSize = true
+                };
+
+                ComboBox chestsRecipeComboBox = new ComboBox
+                {
+                    Name = nameof(chestsRecipeComboBox),
+                    Width = 200,
+                    DropDownStyle = ComboBoxStyle.DropDownList,
+                };
                 chestsRecipeComboBox.Items.Insert(0, "Select recipe (0 found)");
 
                 outputPanel.Controls.Add(label);
-                outputPanel.Controls.Add(numericUpDown);
+                outputPanel.Controls.Add(chestsRepeatNumericUpDown);
                 outputPanel.Controls.Add(chestsRecipeComboBox);
                 chestsRecipeComboBox.SelectedIndex = 0;
             }
@@ -335,6 +354,23 @@ namespace HexetchButBetter
             }
             editMessageLabel("Loaded.");
             return true;
+        }
+
+        private sealed class Material
+        {
+            public long Count { get; }
+            public string Name { get; }
+
+            public Material(long count, string name)
+            {
+                Count = count;
+                Name = name;
+            }
+
+            public override string ToString()
+            {
+                return $"{Count}x {Name}";
+            }
         }
 
         private void processButton_Click(object sender, EventArgs e)
@@ -467,14 +503,15 @@ namespace HexetchButBetter
 
         private async void chestComboBoxChanged(object sender, EventArgs e)
         {
-            ComboBox chestsComboBox = (ComboBox) outputPanel.Controls["chestsComboBox"];
+            ComboBox chestsComboBox = (ComboBox) outputPanel.Controls[nameof(chestsComboBox)];
             if (chestsComboBox.SelectedIndex <= 0) return;
-            ComboBox chestsRecipeComboBox = (ComboBox) outputPanel.Controls["chestsRecipeComboBox"];
+
+            ComboBox chestsRecipeComboBox = (ComboBox) outputPanel.Controls[nameof(chestsRecipeComboBox)];
             chestsRecipeComboBox.Items.Clear();
             chestsRecipeComboBox.ResetText();
             JsonObject item = map["CHEST"][chestsComboBox.SelectedIndex-1];
             recipes = (JsonArray) await lc.Get("/lol-loot/v1/recipes/initial-item/" + item["lootId"]);
-            chestsRecipeComboBox.Items.Insert(0, "Select recipe (" + recipes.Count + " found)");
+            chestsRecipeComboBox.Items.Add("Select recipe (" + recipes.Count + " found)");
             lootNameAndRecipeName = new List<Tuple<string, JsonObject>>();
             foreach (JsonObject recipe in recipes)
             {
@@ -509,7 +546,7 @@ namespace HexetchButBetter
             foreach (KeyValuePair<string, List<String>> data in preparedPosts)
             {
                 foreach (String body in data.Value)
-                lc.Post(data.Key, body);
+                    lc.Post(data.Key, body);
             }
             preparedPosts.Clear();
         }
@@ -535,44 +572,46 @@ namespace HexetchButBetter
 
         private void donateButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The browser will now open.\n" +
-                            "\n" +
-                            "Thank you for considering donation!\n" +
-                            "The software is completely free to use for everyone.\n" +
-                            "If you wish to thank me and help me back, feel free to send me even the smallest possible amount.\n" +
-                            "\n" +
-                            "I will greatly appreciate your goodwill!");
+            MessageBox.Show(
+@"The browser will now open.
+                            
+Thank you for considering donation!
+The software is completely free to use for everyone.
+If you wish to thank me and help me back, feel free to send me even the smallest possible amount.
+                            
+I will greatly appreciate your goodwill!");
             System.Diagnostics.Process.Start("https://www.paypal.me/CoUsTme/1EUR");
         }
 
         private void goalOfHextechButBetterButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The goal of HextechButBetter:\n" +
-                            "\n" +
-                            "I believe that we all should help each other. Many of you expressed your frustration regarding Hextech, disenchanting, exchanging tokens, openings chests and in general about current state. This app aim to resolve the issues by getting rid of annoying animation and delays plus allowing you to do multiple things at once, making the processing Hextech stuff even faster.\n" +
-                            "\n" +
-                            "I wish to share this software with you to achieve two goals:\n" +
-                            "- reduce monotonous and time consuming work of disenchanting, crafting, forging and exchanging items in Hextech\n" +
-                            "- to get Riot back on the right track and make them treat millions of customers with responsibility\n" +
-                            "\n" +
-                            "I believe that Riot in some aspects does NOT treat their customers properly. Hextech is an example of this.\n" +
-                            "Years passed and Hextech functionality is as bad as it was at the beginning. It is about the time they realized of all the time wasted on it by all the players and their frustration.\n" +
-                            "Together, I'm sure we have wasted around million of hours as a species. We could do so much... If not, we could at least spend these 5 minutes that we wasted on Hextech just chilling.\n" +
-                            "\n" +
-                            "Please, if you get a chance, share your opinion of Hextech and your ideas in any Hextech-related topics you can. I believe we can eventually make Riot implement all amazing QoL changes in the client itself!\n" +
-                            "\n" +
-                            "For me, Hextech menu should include at least:\n" +
-                            "- bulk disenchanting/upgrading to speed up process\n" +
-                            "- total BE and OE value of our champion/skin/ward/icon shards\n" +
-                            "- replace second button \"Craft 10 X\" with numeric textbox where you type how many times you want to repeat (open or exchange something)\n" +
-                            "\n" +
-                            "This is minimum what I would consider user-friendly but looking at current state (which is a joke), any improvements will be amazing!\n" +
-                            "\n" +
-                            "The app took me few hours of prototyping and few hours of coding and adjusting stuff with bunch of games in between and with almost no knowledge about C# and literally zero experience. It is NOT idiot-proof and does NOT have many error prevention mechanisms, just do with it what is expected and it shouldn't go boom boom. It is a horribly coded and as generic as it could be but it is working... If you want to have good looking hextech-crafting experience, you can go back to the official client. Some things might not work - I couldn't test it fully due to limited hextech content.\n" +
-                            "\n" +
-                            "\n" +
-                            "\n" +
-                            "Update in 2022: The Hextech UI/UX is as terrible as it was 5 years ago.");
+            MessageBox.Show(
+@"The goal of HextechButBetter:
+                
+I believe that we all should help each other. Many of you expressed your frustration regarding Hextech, disenchanting, exchanging tokens, openings chests and in general about current state. This app aim to resolve the issues by getting rid of annoying animation and delays plus allowing you to do multiple things at once, making the processing Hextech stuff even faster.
+                
+I wish to share this software with you to achieve two goals:
+- reduce monotonous and time consuming work of disenchanting, crafting, forging and exchanging items in Hextech
+- to get Riot back on the right track and make them treat millions of customers with responsibility
+                
+I believe that Riot in some aspects does NOT treat their customers properly. Hextech is an example of this.
+Years passed and Hextech functionality is as bad as it was at the beginning. It is about the time they realized of all the time wasted on it by all the players and their frustration.
+Together, I'm sure we have wasted around million of hours as a species. We could do so much... If not, we could at least spend these 5 minutes that we wasted on Hextech just chilling.
+                
+Please, if you get a chance, share your opinion of Hextech and your ideas in any Hextech-related topics you can. I believe we can eventually make Riot implement all amazing QoL changes in the client itself!
+                
+For me, Hextech menu should include at least:
+- bulk disenchanting/upgrading to speed up process
+- total BE and OE value of our champion/skin/ward/icon shards
+- replace second button ""Craft 10 X"" with numeric textbox where you type how many times you want to repeat (open or exchange something)
+                
+This is minimum what I would consider user-friendly but looking at current state (which is a joke), any improvements will be amazing!
+                
+The app took me few hours of prototyping and few hours of coding and adjusting stuff with bunch of games in between and with almost no knowledge about C# and literally zero experience. It is NOT idiot-proof and does NOT have many error prevention mechanisms, just do with it what is expected and it shouldn't go boom boom. It is a horribly coded and as generic as it could be but it is working... If you want to have good looking hextech-crafting experience, you can go back to the official client. Some things might not work - I couldn't test it fully due to limited hextech content.
+
+
+
+Update in 2022: The Hextech UI/UX is as terrible as it was 5 years ago.");
         }
 
         private void RepoUrlButton_Click(object sender, EventArgs e)
