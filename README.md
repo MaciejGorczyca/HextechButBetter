@@ -3,9 +3,9 @@ HextechButBetter
 
 Making your crafting easier and faster ;)
 
-## Video preview:
+## Video (how to disenchant or exchange loot in v1.7):
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/pi53EOUoszo/0.jpg)](https://www.youtube.com/watch?v=pi53EOUoszo)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6NLjH96nb24/0.jpg)](https://youtu.be/6NLjH96nb24)
 
 ## Description
 Windows C# application with main goal of assisting you during Hextech crafting! The application will fetch data from the running client, mirroring your Hextech data. It will allow you to do much more and much faster!
