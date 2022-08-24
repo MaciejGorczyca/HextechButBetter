@@ -62,7 +62,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace HexetchButBetter
+namespace HextechButBetter
 {
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation

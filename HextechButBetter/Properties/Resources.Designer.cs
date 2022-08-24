@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HexetchButBetter.Properties
+namespace HextechButBetter.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -45,7 +45,7 @@ namespace HexetchButBetter.Properties
                 if ((resourceMan == null))
                 {
                     global::System.Resources.ResourceManager temp =
-                        new global::System.Resources.ResourceManager("HexetchButBetter.Properties.Resources",
+                        new global::System.Resources.ResourceManager("HextechButBetter.Properties.Resources",
                             typeof(Resources).Assembly);
                     resourceMan = temp;
                 }

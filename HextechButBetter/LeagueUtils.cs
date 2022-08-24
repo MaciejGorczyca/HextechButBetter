@@ -5,7 +5,7 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
-namespace HexetchButBetter
+namespace HextechButBetter
 {
     /**
      * Some static utilities used to interact/query the state of the league client process.

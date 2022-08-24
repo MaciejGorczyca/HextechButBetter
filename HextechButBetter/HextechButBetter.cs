@@ -11,7 +11,7 @@ using System.Windows.Forms;
 // move into diff file
 // https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/loot.json
 
-namespace HexetchButBetter
+namespace HextechButBetter
 {
     public partial class HextechButBetterForm : Form
     {
