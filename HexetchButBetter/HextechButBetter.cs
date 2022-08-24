@@ -171,7 +171,7 @@ namespace HexetchButBetter
 
         private void printIcons()
         {
-            printContent("ICON", LootType.Icon);
+            printContent("SUMMONERICON", LootType.Icon);
         }
 
         private void printCompanions()
@@ -390,7 +390,7 @@ namespace HexetchButBetter
                     processLoot(map["WARDSKIN"]);
                     break;
                 case LootType.Icon:
-                    processLoot(map["ICON"]);
+                    processLoot(map["SUMMONERICON"]);
                     break;
                 case LootType.Companion:
                     processLoot(map["COMPANION"]);
