@@ -1,4 +1,4 @@
-﻿﻿namespace HexetchButBetter
+﻿﻿namespace HextechButBetter
 {
     partial class HextechButBetterForm
     {

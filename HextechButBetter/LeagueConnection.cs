@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebSocketSharp;
 
-namespace HexetchButBetter
+namespace HextechButBetter
 {
     /**
      * Class that manages a connection with the LCU. This will automatically connect to the League

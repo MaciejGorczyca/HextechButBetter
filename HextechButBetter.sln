@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexetchButBetter", "HexetchButBetter\HexetchButBetter.csproj", "{2C1BE8E1-06BA-4F77-970F-16995A60DEF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HextechButBetter", "HextechButBetter\HextechButBetter.csproj", "{2C1BE8E1-06BA-4F77-970F-16995A60DEF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
