@@ -102,7 +102,7 @@ namespace HextechButBetter
         {
             if (!lc.IsConnected)
             {
-                editMessageLabel("Not connected to League Client! You need to log in first and wait few seconds.");
+                editMessageLabel("Not connected to League Client! You need to log in first and wait few seconds. Try running app as admin too.");
                 return false;
             }
             else return true;

@@ -57,7 +57,7 @@
             this.loadChampionsButton.Location = new System.Drawing.Point(0, 0);
             this.loadChampionsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadChampionsButton.Name = "loadChampionsButton";
-            this.loadChampionsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadChampionsButton.Size = new System.Drawing.Size(120, 40);
             this.loadChampionsButton.TabIndex = 0;
             this.loadChampionsButton.Text = "Load champions";
             this.loadChampionsButton.UseVisualStyleBackColor = true;
@@ -66,10 +66,10 @@
             // messageLabel
             // 
             this.messageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.messageLabel.Location = new System.Drawing.Point(0, 350);
+            this.messageLabel.Location = new System.Drawing.Point(0, 320);
             this.messageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(120, 52);
+            this.messageLabel.Size = new System.Drawing.Size(120, 87);
             this.messageLabel.TabIndex = 1;
             // 
             // outputPanel
@@ -110,10 +110,10 @@
             // challengerAreEvilUrlButton
             // 
             this.challengerAreEvilUrlButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.challengerAreEvilUrlButton.Location = new System.Drawing.Point(0, 400);
+            this.challengerAreEvilUrlButton.Location = new System.Drawing.Point(0, 410);
             this.challengerAreEvilUrlButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.challengerAreEvilUrlButton.Name = "challengerAreEvilUrlButton";
-            this.challengerAreEvilUrlButton.Size = new System.Drawing.Size(120, 50);
+            this.challengerAreEvilUrlButton.Size = new System.Drawing.Size(120, 40);
             this.challengerAreEvilUrlButton.TabIndex = 18;
             this.challengerAreEvilUrlButton.Text = "Check challenge tokens remover";
             this.challengerAreEvilUrlButton.UseVisualStyleBackColor = true;
@@ -134,10 +134,10 @@
             // loadChestsButton
             // 
             this.loadChestsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadChestsButton.Location = new System.Drawing.Point(0, 350);
+            this.loadChestsButton.Location = new System.Drawing.Point(0, 280);
             this.loadChestsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadChestsButton.Name = "loadChestsButton";
-            this.loadChestsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadChestsButton.Size = new System.Drawing.Size(120, 40);
             this.loadChestsButton.TabIndex = 17;
             this.loadChestsButton.Text = "Load chests";
             this.loadChestsButton.UseVisualStyleBackColor = true;
@@ -146,10 +146,10 @@
             // loadEternalsButton
             // 
             this.loadEternalsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadEternalsButton.Location = new System.Drawing.Point(0, 300);
+            this.loadEternalsButton.Location = new System.Drawing.Point(0, 240);
             this.loadEternalsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadEternalsButton.Name = "loadEternalsButton";
-            this.loadEternalsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadEternalsButton.Size = new System.Drawing.Size(120, 40);
             this.loadEternalsButton.TabIndex = 16;
             this.loadEternalsButton.Text = "Load eternals";
             this.loadEternalsButton.UseVisualStyleBackColor = true;
@@ -158,10 +158,10 @@
             // loadCompanionsButton
             // 
             this.loadCompanionsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadCompanionsButton.Location = new System.Drawing.Point(0, 250);
+            this.loadCompanionsButton.Location = new System.Drawing.Point(0, 200);
             this.loadCompanionsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadCompanionsButton.Name = "loadCompanionsButton";
-            this.loadCompanionsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadCompanionsButton.Size = new System.Drawing.Size(120, 40);
             this.loadCompanionsButton.TabIndex = 8;
             this.loadCompanionsButton.Text = "Load companions";
             this.loadCompanionsButton.UseVisualStyleBackColor = true;
@@ -205,10 +205,10 @@
             // loadIconsButton
             // 
             this.loadIconsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadIconsButton.Location = new System.Drawing.Point(0, 200);
+            this.loadIconsButton.Location = new System.Drawing.Point(0, 160);
             this.loadIconsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadIconsButton.Name = "loadIconsButton";
-            this.loadIconsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadIconsButton.Size = new System.Drawing.Size(120, 40);
             this.loadIconsButton.TabIndex = 7;
             this.loadIconsButton.Text = "Load icons";
             this.loadIconsButton.UseVisualStyleBackColor = true;
@@ -217,10 +217,10 @@
             // loadWardsButton
             // 
             this.loadWardsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadWardsButton.Location = new System.Drawing.Point(0, 150);
+            this.loadWardsButton.Location = new System.Drawing.Point(0, 120);
             this.loadWardsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadWardsButton.Name = "loadWardsButton";
-            this.loadWardsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadWardsButton.Size = new System.Drawing.Size(120, 40);
             this.loadWardsButton.TabIndex = 6;
             this.loadWardsButton.Text = "Load wards";
             this.loadWardsButton.UseVisualStyleBackColor = true;
@@ -239,10 +239,10 @@
             // loadEmotesButton
             // 
             this.loadEmotesButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadEmotesButton.Location = new System.Drawing.Point(0, 100);
+            this.loadEmotesButton.Location = new System.Drawing.Point(0, 80);
             this.loadEmotesButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadEmotesButton.Name = "loadEmotesButton";
-            this.loadEmotesButton.Size = new System.Drawing.Size(120, 50);
+            this.loadEmotesButton.Size = new System.Drawing.Size(120, 40);
             this.loadEmotesButton.TabIndex = 4;
             this.loadEmotesButton.Text = "Load emotes";
             this.loadEmotesButton.UseVisualStyleBackColor = true;
@@ -251,10 +251,10 @@
             // loadSkinsButton
             // 
             this.loadSkinsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadSkinsButton.Location = new System.Drawing.Point(0, 50);
+            this.loadSkinsButton.Location = new System.Drawing.Point(0, 40);
             this.loadSkinsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadSkinsButton.Name = "loadSkinsButton";
-            this.loadSkinsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadSkinsButton.Size = new System.Drawing.Size(120, 40);
             this.loadSkinsButton.TabIndex = 3;
             this.loadSkinsButton.Text = "Load skins";
             this.loadSkinsButton.UseVisualStyleBackColor = true;
