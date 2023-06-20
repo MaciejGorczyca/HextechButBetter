@@ -23,6 +23,7 @@ namespace HextechButBetter
             { "Disenchant", "DISENCHANT" },
             { "Upgrade", "UPGRADE" },
             { "Reroll", "REROLL" },
+            { "Forge into Unowned Permanent", "FORGE" },
             { "Forge into egg", "FORGE" },
         };
 
@@ -151,6 +152,11 @@ namespace HextechButBetter
             {
                 case LootType.Companion:
                     processType.Items.Insert(0, "Forge into egg");
+                    break;
+                case LootType.Emote:
+                    processType.Items.Insert(0, "");
+                    processType.Items.Insert(1, "Disenchant");
+                    processType.Items.Insert(2, "Forge into Unowned Permanent");
                     break;
                 default:
                     processType.Items.Insert(0, "");
