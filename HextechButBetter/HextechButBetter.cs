@@ -17,14 +17,19 @@ namespace HextechButBetter
     {
 
         LeagueConnection lc;
+
+        private const String DISENCHANT_TEXT = "Disenchant";
+        private const String UPGRADE_TEXT = "Upgrade";
+        private const String FORGE_EMOTE_TEXT = "Forge into Unowned Permanent";
+        private const String FORGE_EGG_TEXT = "Forge into egg";
+
         Dictionary<String, List<JsonObject>> map = new Dictionary<string, List<JsonObject>>();
         Dictionary<String, String> processTypes = new Dictionary<string, string>
         {
-            { "Disenchant", "DISENCHANT" },
-            { "Upgrade", "UPGRADE" },
-            { "Reroll", "REROLL" },
-            { "Forge into Unowned Permanent", "FORGE" },
-            { "Forge into egg", "FORGE" },
+            { DISENCHANT_TEXT, "DISENCHANT" },
+            { UPGRADE_TEXT, "UPGRADE" },
+            { FORGE_EMOTE_TEXT, "FORGE" },
+            { FORGE_EGG_TEXT, "FORGE" },
         };
 
         private Dictionary<String, List<String>> preparedPosts = new Dictionary<string, List<String>>();
@@ -151,17 +156,17 @@ namespace HextechButBetter
             switch (currentLoot)
             {
                 case LootType.Companion:
-                    processType.Items.Insert(0, "Forge into egg");
+                    processType.Items.Insert(0, FORGE_EGG_TEXT);
                     break;
                 case LootType.Emote:
                     processType.Items.Insert(0, "");
-                    processType.Items.Insert(1, "Disenchant");
-                    processType.Items.Insert(2, "Forge into Unowned Permanent");
+                    processType.Items.Insert(1, DISENCHANT_TEXT);
+                    processType.Items.Insert(2, FORGE_EMOTE_TEXT);
                     break;
                 default:
                     processType.Items.Insert(0, "");
-                    processType.Items.Insert(1, "Disenchant");
-                    processType.Items.Insert(2, "Upgrade (doesn't seem to work)");
+                    processType.Items.Insert(1, DISENCHANT_TEXT);
+                    processType.Items.Insert(2, UPGRADE_TEXT);
                     break;
             }
         }
