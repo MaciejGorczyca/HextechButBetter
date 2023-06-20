@@ -34,10 +34,11 @@
             this.messageLabel = new System.Windows.Forms.Label();
             this.outputPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.challengerAreEvilUrlButton = new System.Windows.Forms.Button();
             this.repoUrlButton = new System.Windows.Forms.Button();
             this.loadChestsButton = new System.Windows.Forms.Button();
+            this.loadEternalsButton = new System.Windows.Forms.Button();
             this.loadCompanionsButton = new System.Windows.Forms.Button();
-            this.goalOfHextechButBetterButton = new System.Windows.Forms.Button();
             this.legalNoteButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.donateButton = new System.Windows.Forms.Button();
@@ -83,10 +84,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.challengerAreEvilUrlButton);
             this.panel1.Controls.Add(this.repoUrlButton);
             this.panel1.Controls.Add(this.loadChestsButton);
+            this.panel1.Controls.Add(this.loadEternalsButton);
             this.panel1.Controls.Add(this.loadCompanionsButton);
-            this.panel1.Controls.Add(this.goalOfHextechButBetterButton);
             this.panel1.Controls.Add(this.legalNoteButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.donateButton);
@@ -105,10 +107,22 @@
             this.panel1.Size = new System.Drawing.Size(120, 681);
             this.panel1.TabIndex = 3;
             // 
+            // challengerAreEvilUrlButton
+            // 
+            this.challengerAreEvilUrlButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.challengerAreEvilUrlButton.Location = new System.Drawing.Point(0, 400);
+            this.challengerAreEvilUrlButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.challengerAreEvilUrlButton.Name = "challengerAreEvilUrlButton";
+            this.challengerAreEvilUrlButton.Size = new System.Drawing.Size(120, 50);
+            this.challengerAreEvilUrlButton.TabIndex = 18;
+            this.challengerAreEvilUrlButton.Text = "Check challenge tokens remover";
+            this.challengerAreEvilUrlButton.UseVisualStyleBackColor = true;
+            this.challengerAreEvilUrlButton.Click += new System.EventHandler(this.ChallengerAreEvilUrlButton_Click);
+            // 
             // repoUrlButton
             // 
             this.repoUrlButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.repoUrlButton.Location = new System.Drawing.Point(0, 410);
+            this.repoUrlButton.Location = new System.Drawing.Point(0, 450);
             this.repoUrlButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.repoUrlButton.Name = "repoUrlButton";
             this.repoUrlButton.Size = new System.Drawing.Size(120, 50);
@@ -120,14 +134,26 @@
             // loadChestsButton
             // 
             this.loadChestsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadChestsButton.Location = new System.Drawing.Point(0, 300);
+            this.loadChestsButton.Location = new System.Drawing.Point(0, 350);
             this.loadChestsButton.Margin = new System.Windows.Forms.Padding(0);
             this.loadChestsButton.Name = "loadChestsButton";
             this.loadChestsButton.Size = new System.Drawing.Size(120, 50);
-            this.loadChestsButton.TabIndex = 14;
+            this.loadChestsButton.TabIndex = 17;
             this.loadChestsButton.Text = "Load chests";
             this.loadChestsButton.UseVisualStyleBackColor = true;
             this.loadChestsButton.Click += new System.EventHandler(this.loadChestsButton_Click);
+            // 
+            // loadEternalsButton
+            // 
+            this.loadEternalsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.loadEternalsButton.Location = new System.Drawing.Point(0, 300);
+            this.loadEternalsButton.Margin = new System.Windows.Forms.Padding(0);
+            this.loadEternalsButton.Name = "loadEternalsButton";
+            this.loadEternalsButton.Size = new System.Drawing.Size(120, 50);
+            this.loadEternalsButton.TabIndex = 16;
+            this.loadEternalsButton.Text = "Load eternals";
+            this.loadEternalsButton.UseVisualStyleBackColor = true;
+            this.loadEternalsButton.Click += new System.EventHandler(this.loadEternalsButton_Click);
             // 
             // loadCompanionsButton
             // 
@@ -140,18 +166,6 @@
             this.loadCompanionsButton.Text = "Load companions";
             this.loadCompanionsButton.UseVisualStyleBackColor = true;
             this.loadCompanionsButton.Click += new System.EventHandler(this.loadCompanionsButton_Click);
-            // 
-            // goalOfHextechButBetterButton
-            // 
-            this.goalOfHextechButBetterButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.goalOfHextechButBetterButton.Location = new System.Drawing.Point(0, 460);
-            this.goalOfHextechButBetterButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.goalOfHextechButBetterButton.Name = "goalOfHextechButBetterButton";
-            this.goalOfHextechButBetterButton.Size = new System.Drawing.Size(120, 40);
-            this.goalOfHextechButBetterButton.TabIndex = 12;
-            this.goalOfHextechButBetterButton.Text = "Goal of HextechButBetter";
-            this.goalOfHextechButBetterButton.UseVisualStyleBackColor = true;
-            this.goalOfHextechButBetterButton.Click += new System.EventHandler(this.goalOfHextechButBetterButton_Click);
             // 
             // legalNoteButton
             // 
@@ -274,6 +288,10 @@
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.Button challengerAreEvilUrlButton;
+
+        private System.Windows.Forms.Button loadEternalsButton;
+
         private System.Windows.Forms.Button repoUrlButton;
 
         #endregion
@@ -291,7 +309,6 @@
         private System.Windows.Forms.Button loadWardsButton;
         private System.Windows.Forms.Button donateButton;
         private System.Windows.Forms.Button legalNoteButton;
-        private System.Windows.Forms.Button goalOfHextechButBetterButton;
         private System.Windows.Forms.Button loadChestsButton;
         private System.Windows.Forms.Button loadChampionsButton;
     }

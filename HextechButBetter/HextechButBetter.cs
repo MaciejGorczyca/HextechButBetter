@@ -33,7 +33,7 @@ namespace HextechButBetter
         
         private List<Tuple<string, JsonObject>> lootNameAndRecipeName = new List<Tuple<string, JsonObject>>();
         
-        enum LootType {Unknown, Champion, Skin, Emote, Wardskin, Icon, Companion, Chest};
+        enum LootType {Unknown, Champion, Skin, Emote, Wardskin, Icon, Companion, Eternals, Chest};
         private LootType currentLoot = LootType.Unknown;
         
         public HextechButBetterForm()
@@ -49,51 +49,42 @@ namespace HextechButBetter
 
         private async void loadChampionsButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printChampions();
+            await printContent("CHAMPION", LootType.Champion);
         }
 
         private async void loadSkinsButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printSkins();
+            printContent("SKIN", LootType.Skin);
         }
 
         private async void loadEmotesButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printEmotes();
+            printContent("EMOTE", LootType.Emote);
         }
 
         private async void loadWardsButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printWards();
+            printContent("WARDSKIN", LootType.Wardskin);
         }
 
         private async void loadIconsButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printIcons();
+            printContent("SUMMONERICON", LootType.Icon);
         }
 
         private async void loadCompanionsButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printCompanions();
+            printContent("COMPANION", LootType.Companion);
+        }
+
+        private async void loadEternalsButton_Click(object sender, EventArgs e)
+        {
+            printContent("ETERNALS", LootType.Eternals);
         }
 
         private async void loadChestsButton_Click(object sender, EventArgs e)
         {
-            if (!checkIfLeagueIsConnected()) return;
-            await refreshData();
-            printChests();
+            printContent("CHEST", LootType.Chest);
         }
 
         private void editMessageLabel(String msg)
@@ -141,47 +132,16 @@ namespace HextechButBetter
             outputPanel.Controls.Clear();
         }
 
-        private void printContent(string contentType, LootType lootType)
+        private async Task printContent(string contentType, LootType lootType)
         {
+            
+            if (!checkIfLeagueIsConnected()) return;
+            await refreshData();
+            
             if (!printData(contentType))
                 return;
             currentLoot = lootType;
             fillProcessType();
-        }
-
-        private void printChampions()
-        {
-            printContent("CHAMPION", LootType.Champion);
-        }
-
-        private void printSkins()
-        {
-            printContent("SKIN", LootType.Skin);
-        }
-
-        private void printEmotes()
-        {
-            printContent("EMOTE", LootType.Emote);
-        }
-
-        private void printWards()
-        {
-            printContent("WARDSKIN", LootType.Wardskin);
-        }
-
-        private void printIcons()
-        {
-            printContent("SUMMONERICON", LootType.Icon);
-        }
-
-        private void printCompanions()
-        {
-            printContent("COMPANION", LootType.Companion);
-        }
-
-        private void printChests()
-        {
-            printContent("CHEST", LootType.Chest);
         }
 
         private void fillProcessType()
@@ -195,7 +155,7 @@ namespace HextechButBetter
                 default:
                     processType.Items.Insert(0, "");
                     processType.Items.Insert(1, "Disenchant");
-                    processType.Items.Insert(2, "Upgrade");
+                    processType.Items.Insert(2, "Upgrade (doesn't seem to work)");
                     break;
             }
         }
@@ -392,6 +352,9 @@ namespace HextechButBetter
                 case LootType.Icon:
                     processLoot(map["SUMMONERICON"]);
                     break;
+                case LootType.Eternals:
+                    processLoot(map["ETERNALS"]);
+                    break;
                 case LootType.Companion:
                     processLoot(map["COMPANION"]);
                     break;
@@ -583,40 +546,14 @@ I will greatly appreciate your goodwill!");
             System.Diagnostics.Process.Start("https://www.paypal.me/CoUsTme/1EUR");
         }
 
-        private void goalOfHextechButBetterButton_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-@"The goal of HextechButBetter:
-                
-I believe that we all should help each other. Many of you expressed your frustration regarding Hextech, disenchanting, exchanging tokens, openings chests and in general about current state. This app aim to resolve the issues by getting rid of annoying animation and delays plus allowing you to do multiple things at once, making the processing Hextech stuff even faster.
-                
-I wish to share this software with you to achieve two goals:
-- reduce monotonous and time consuming work of disenchanting, crafting, forging and exchanging items in Hextech
-- to get Riot back on the right track and make them treat millions of customers with responsibility
-                
-I believe that Riot in some aspects does NOT treat their customers properly. Hextech is an example of this.
-Years passed and Hextech functionality is as bad as it was at the beginning. It is about the time they realized of all the time wasted on it by all the players and their frustration.
-Together, I'm sure we have wasted around million of hours as a species. We could do so much... If not, we could at least spend these 5 minutes that we wasted on Hextech just chilling.
-                
-Please, if you get a chance, share your opinion of Hextech and your ideas in any Hextech-related topics you can. I believe we can eventually make Riot implement all amazing QoL changes in the client itself!
-                
-For me, Hextech menu should include at least:
-- bulk disenchanting/upgrading to speed up process
-- total BE and OE value of our champion/skin/ward/icon shards
-- replace second button ""Craft 10 X"" with numeric textbox where you type how many times you want to repeat (open or exchange something)
-                
-This is minimum what I would consider user-friendly but looking at current state (which is a joke), any improvements will be amazing!
-                
-The app took me few hours of prototyping and few hours of coding and adjusting stuff with bunch of games in between and with almost no knowledge about C# and literally zero experience. It is NOT idiot-proof and does NOT have many error prevention mechanisms, just do with it what is expected and it shouldn't go boom boom. It is a horribly coded and as generic as it could be but it is working... If you want to have good looking hextech-crafting experience, you can go back to the official client. Some things might not work - I couldn't test it fully due to limited hextech content.
-
-
-
-Update in 2022: The Hextech UI/UX is as terrible as it was 5 years ago.");
-        }
-
         private void RepoUrlButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MaciejGorczyca/HextechButBetter/releases/latest");
+        }
+
+        private void ChallengerAreEvilUrlButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MaciejGorczyca/ChallengesAreEvil");
         }
     }
 }
